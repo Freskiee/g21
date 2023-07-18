@@ -6,8 +6,9 @@ const {
   updateTareas,
   deleteTareas,
 } = require("../controllers/tareasControllers");
+const {protect} = require ('../middleware/authMiddleware.js')
 
-router.route('/').get(getTareas).post(createTareas)
-router.route('/:id').delete(deleteTareas).put(updateTareas)
+router.route('/').get(protect, getTareas).post(protect, createTareas)
+router.route('/:id').delete(protect, deleteTareas).put(protect, updateTareas)
 
 module.exports = router;
